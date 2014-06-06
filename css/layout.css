@@ -1,0 +1,311 @@
+* {
+    outline: none !important;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    overflow: hidden;
+    margin: 0px;
+}
+
+body {
+    background-color: #fff;    
+	color:#3F3F3F;
+    font-size: 14px;
+    overflow: hidden;
+    font-family: 'Maiden Orange', Georgia, Arial, sans-serif;
+}
+
+h2 {
+    font-weight: 300;
+    font-size: 140%;
+	display: inline;
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+input,button {
+    /*vertical-align:middle;*/
+	font-size:11pt;
+	font-family: 'Maiden Orange', Georgia, Arial, sans-serif;
+}
+
+/* ID */
+#footer {
+    height: 290px;
+    font-size: 11pt;
+    color: #222;
+    /*overflow-y: hidden !important;*/
+    vertical-align: middle;
+    text-align: left;
+    font-weight: 200;
+    padding: 0px !important;   
+}
+
+#map {
+    padding: 0px !important;
+    /*box-shadow: 0 0 0.6em rgba(4, 4, 4, .8);*/
+}
+
+#menu {
+    min-height: 30px;
+    margin-bottom: 5px;
+    min-width: 100%;
+    width: 100%;
+    overflow: hidden !important;
+    vertical-align: middle;
+    padding: 4px 2px 3px 2px;
+    font-size: 12pt;
+    font-weight: 200;
+	border-bottom: 4px double #CECECE;
+	color:#3F3F3F !important;	
+}
+
+#tweetstatus {
+	font-size:140%;	
+}
+
+/* classes */
+.title123 {
+    /*text-shadow: 0px 2px 3px #ccc;*/
+    font-size: 15pt;
+    display: block;
+    font-weight: 200;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 10pt;
+    color: #fff;
+    text-shadow: 0 1px #000000;
+}
+
+.esriPopup {
+    font-family: 'Maiden Orange', Arial, sans-serif !important;
+    font-size: 12pt !important;
+}
+
+.copyright {
+    position: absolute;
+    z-index: 30;
+    bottom: 0px;
+    right: 0px;
+    display: compact;
+    padding: 1px 2px;
+    background-color: #eee;
+    font-size: 9pt;
+    color: #444;
+    -webkit-border-radius: 5px 0px 5px 0px;
+    border-radius: 5px 0px 5px 0px;
+    -moz-border-radius: 5px 0px 5px 0px;
+}
+
+.whereintheworld {
+    position: absolute;
+    z-index: 30;
+    bottom: 0px;
+    left: 0px;
+    display: compact;
+    padding: 1px 2px;
+    font-size: 10pt;
+    color: #444;
+    background-color: #eee;
+    -webkit-border-radius: 0px 5px 0px 5px;
+    border-radius: 0px 5px 0px 5px;
+    -moz-border-radius: 0px 5px 0px 5px;
+}
+
+.locatediv {
+    padding: 5px;
+    background-color: #eee;
+    position: absolute;
+    top: 1px;
+    right: 50px;
+    font-size: 12pt;
+    color: #444;
+    z-index: 30;
+}
+
+.trans50 {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity = 50);
+    /* Older than Firefox 0.9 */
+    -moz-opacity: 0.5;
+    /* Safari 1.x (pre WebKit!) */
+    -khtml-opacity: 0.5;
+    /* Modern */
+    opacity: 0.5;
+}
+
+.trans70 {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity = 70);
+    /* Older than Firefox 0.9 */
+    -moz-opacity: 0.7;
+    /* Safari 1.x (pre WebKit!) */
+    -khtml-opacity: 0.7;
+    /* Modern */
+    opacity: 0.7;
+}
+
+.button {
+    cursor: pointer;
+    border: 2px solid rgb(204, 204, 204);
+    padding: 2px;
+    margin-left: 5px;
+    font-size: 10pt;
+    background-color: #999;
+    color: #fff;
+}
+
+.info {
+    color: #fff;
+    font-size: 10pt;
+    display: compact;
+    padding: 5px 10px 8px 10px;
+    text-align: center;
+    max-width: 400px;
+    max-height: 100px;
+    overflow: hidden;
+    position: absolute;
+    left: 50px;
+    top: 5px;
+    z-index: 31;
+    margin: auto;
+    text-shadow: 0px 2px 3px #ccc;
+}
+
+.basemapIcon {
+    background-image: url(../images/basemap32.png);
+    width: 26px;
+    height: 26px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    text-align: center;
+    padding: 1px 3px;
+}
+
+.tweetbox {
+    min-width: 210px;
+    width: 210px !important;
+	max-width: 210px;
+    height: 200px !important;
+	min-height: 200px;
+	max-height: 200px;
+	overflow:hidden;
+    padding: 1px 2px;
+    border: 2px solid #CeCeCe;
+    vertical-align: top;
+    text-align: center;
+	font-size:12pt;
+	position:relative;
+    background: transparent url(../images/twitter-bird-gray-49x30.png) no-repeat scroll left top;
+}
+
+.tweetbox:hover {
+    background-color: #dfdfdf;
+    /*box-shadow: 0px 1px 5px rgba(9, 9, 9, 0.6);*/
+    box-shadow: 0px 1px 10px rgba(192, 222, 236, 1.0);
+	border: 2px solid #C0DEEC;  
+	background: #dfdfdf url(../images/twitter-bird-blue-49x30.png) no-repeat scroll left top;
+}
+
+.selectedTweet {
+	box-shadow: 0px 1px 15px rgba(192, 222, 236, 1.0);
+	border: 2px solid #C0DEEC;
+	background: #dfdfdf url(../images/twitter-bird-blue-49x30.png) no-repeat scroll left top;
+	background-color: #dfdfdf;
+}
+
+.clickhere {
+	background: url(../images/clickhere.jpg) no-repeat scroll left top;
+	margin-left:5px;
+	padding-top:20px;	
+	min-height:200px;
+	vertical-align:middle;
+	text-align:center;	
+	overflow:hidden;
+	font-size:18pt;
+}
+
+/* Overrides */
+.map .logo-med {
+    right: 1px !important;
+    bottom: 20px !important;
+}
+
+.bingLogo-lg {
+    left: 2px !important;
+    bottom: 16px !important;
+}
+
+.dijitButtonNode {
+    padding: 1px !important;
+}
+
+/*
+ .dijitButtonHover {
+ outline:none;
+ color: #aaa;
+ }
+ 
+ .dijitButtonNode {
+ background: none;
+ border: none;
+ }
+ 
+ .dijitTooltipContainer {
+ border-color:#999 !important;
+ }
+ */
+/* Utils */
+.shadow {
+    margin: 0 2px 2px 0;
+    -moz-box-shadow: 4px 4px 10px rgba(9, 9, 9, 0.6);
+    -webkit-box-shadow: 4px 4px 10px rgba(9, 9, 9, 0.6);
+    box-shadow: 4px 4px 10px rgba(9, 9, 9, 0.6);
+}
+
+.round {
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.borderbottom {
+	border-bottom: 4px double #CECECE;
+}
+
+.roundbottom {
+    -webkit-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+    -moz-border-radius: 0px 0px 5px 5px;
+    /*
+     -webkit-border-bottom-left-radius: 5px;
+     -webkit-border-bottom-right-radius: 5px;
+     -moz-border-radius-bottomleft: 5px;
+     -moz-border-radius-bottomright: 5px;
+     border-bottom-left-radius: 5px;
+     border-bottom-right-radius: 5px;
+     */
+}
+
+.roundtop {
+    -webkit-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    /*
+     -webkit-border-top-left-radius: 5px;
+     -webkit-border-top-right-radius: 5px;
+     -moz-border-radius-topleft: 5px;
+     -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+     */
+}

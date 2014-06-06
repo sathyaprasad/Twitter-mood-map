@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="css/layout.css">
+        <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/2.8/js/dojo/dijit/themes/tundra/tundra.css">
+        <link rel="stylesheet" type='text/css' href='//serverapi.arcgisonline.com/jsapi/arcgis/2.8/js/esri/dijit/css/Popup.css'/>
+        <link href='//fonts.googleapis.com/css?family=Maiden+Orange' rel='stylesheet' type='text/css'>
+        <script type="text/javascript">
+            var djConfig = {
+                parseOnLoad: true
+            };
+        </script>
+        <script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/?v=2.8compact">
+        </script>
+        <script type="text/javascript" src="javascript/app.js">
+        </script>
+        <script type="text/javascript" src="javascript/twitter.js">
+        </script>
+        <script type="text/javascript" src="https://www.google.com/jsapi">
+        </script>
+        <!--[if lt IE 9]>
+            <script type="text/javascript" src="javascript/excanvas.compiled.js"></script>
+        <![endif]-->	
+        <script type="text/javascript" src="javascript/heatlayer.js">
+        </script>
+        <script type="text/javascript">
+            dojo.require("dijit.dijit");
+            dojo.require("dojo.parser");
+            dojo.require("dijit.layout.BorderContainer");
+            dojo.require("dijit.layout.ContentPane");
+            dojo.require("dijit.form.Button");
+            dojo.require("dijit.TooltipDialog");
+            dojo.require("dijit.form.RadioButton");
+            dojo.require("dojo.fx");
+            //charting
+            google.load('visualization', '1', {
+                'packages': ['corechart']
+            });
+            dojo.require("esri.map");
+            dojo.require("esri.arcgis.utils");
+            dojo.require("esri.tasks.locator");
+            dojo.require("esri.layers.osm");
+            dojo.require("esri.dijit.BasemapGallery");
+            dojo.require("esri.dijit.Popup");
+        </script>
+    </head>
+    <body class="tundra">
+        <div id="mainWindow" dojotype="dijit.layout.BorderContainer" design="headline" gutters="true" style="width:100%; margin:0px; height:100%;">
+            <!-- Map Section -->
+            <div id="map" class="round" dojotype="dijit.layout.ContentPane" region="center">
+                <img src="images/locate-me-26x26.png" class="round shadow" style="cursor:pointer;background-color:#fff;border:1px solid #ccc;padding:1px;width:26px;z-index:30;position:absolute;left:11px;top:85px;" id="locatemeicon" title="My Location" alt="My Location"/><img src="images/zoom-points-26x26.png" class="round shadow" style="padding:1px;background-color:#fff;border:1px solid #ccc;cursor:pointer;width:26px;z-index:30;position:absolute;left:11px;top:120px;" id="zoomtotweetsicon" title="Zoom To Tweets" alt="Zoom To Tweets"/><img src="images/globe-gray-26x26.png" class="round shadow" style="padding:1px;background-color:#fff;cursor:pointer;position:absolute; width:26px;top:157px;left:12px; z-index:30;" id="zoomreseticon" alt="Zoom Reset" title="Zoom Reset"/>
+                <div class="locatediv round shadow" style="vertical-align:top;border:1px solid #666;">
+                    Locate: <input type="text" id="locateaddrBox" class="round" style="font-size:11pt;margin:0; padding:0 2px; border:1px solid #ccc;vertical-align:top;"/>
+                    <img alt="" id="searchicon" src="images/search.png" style="width:16px;vertical-align:top;cursor:pointer;"/>
+                </div>
+                <span id="tweetstatus" class="round shadow" style="position:absolute;right:5px;padding:5px;top:50px;z-index:99;border:2px solid #666;background-color:#fff;opacity: 0.8;">Ready!</span>
+                <div id="copyright" class="copyright" title="Map data attribution">
+                </div>
+                <div id="whereintheworld" class="whereintheworld" title="Map Center">
+                </div>
+                <div class="textshadow" style="float:left;bottom:17px;left:0px;position:absolute;z-index:33;font-size:9pt;">
+                    <span id="scaleinfo" style="padding: 0 5px;">&nbsp;</span>|<span id="coordsinfo" style="padding: 0 5px;">&nbsp;</span>
+                </div>
+                <span dojoType="dijit.form.DropDownButton" label="Change Basemap" class="shadow" style="z-index:30;position:absolute;top:0px;right:2px;" showLabel="false" iconClass="basemapIcon">
+                    <div dojotype="dijit.TooltipDialog" style="max-width:400px;" title="Choose your basemap" execute="">
+                        <div id="basemapGallery">
+                        </div>
+                    </div>
+                </span>
+                <div id="tweetchartdiv" class="round shadow" style="z-index:33;display:none;width:300px;height:200px;position:absolute;bottom:34px;left:2px;background-color:#fff;padding:2px;">
+                </div>
+            </div>
+            <div class="round" id="footer" dojotype="dijit.layout.ContentPane" region="bottom" splitter="true">
+                <div class="" id="menu">
+                    <h2>Display: </h2>
+                    <input dojoType="dijit.form.RadioButton" type="radio" id="radioOne" onclick="updateTweets('happy');" name="selectmood" value="happy"/>
+                    <label for="radioOne">
+                        Happy
+                    </label>
+                    <input dojoType="dijit.form.RadioButton" type="radio" id="radioTwo" onclick="updateTweets('sad');" name="selectmood" value="sad"/>
+                    <label for="radioTwo">
+                        Sad
+                    </label>
+                    <input dojoType="dijit.form.RadioButton" type="radio" id="radioSix" onclick="updateTweets('question');" name="selectmood" value="question"/>
+                    <label for="radioSix">
+                        Question
+                    </label>
+                    <input type="radio" name="selectmood" id="radioThree" onclick="updateTweets('retweet');" dojoType="dijit.form.RadioButton" value="retweets"/>
+                    <label for="radioThree">
+                        Retweets
+                    </label>
+                    <input type="radio" name="selectmood" id="radioFour" onclick="updateTweets('checkin');" dojoType="dijit.form.RadioButton" value="checkins"/>
+                    <label for="radioFour">
+                        Checkins
+                    </label>
+					<input type="radio" name="selectmood" id="radioNine" onclick="updateTweets('facebook');" dojoType="dijit.form.RadioButton" value="checkins"/>
+                    <label for="radioNine">
+                        Facebook
+                    </label>
+                    <input dojoType="dijit.form.RadioButton" type="radio" id="radioEight" onclick="updateTweets('pics');" name="selectmood" value="pics"/>
+                    <label for="radioEight">
+                        Pics
+                    </label>
+                    <input dojoType="dijit.form.RadioButton" type="radio" id="radioSeven" onclick="updateTweets('link');" name="selectmood" value="link"/>
+                    <label for="radioSeven">
+                        Links
+                    </label>
+                    &nbsp;| <input type="radio" name="selectmood" id="radioFive" onclick="updateTweets('text')" dojoType="dijit.form.RadioButton" value="text"/>
+                    <label for="radioFive">
+                        Text
+                    </label>
+                    <label for="radioFive">
+                        <input type="text" value="" id="twittersearchbox" placeholder="Search" size="15"/>
+                    </label>&nbsp;|&nbsp; <h2>Options: </h2>                    
+                    <img src="images/button_grey_close.png" id="clearImage" style="cursor:pointer;width:32px;vertical-align:middle;" onclick="removeTweets()" alt="Remove Tweets" title="Remove Tweets"/>                    
+                    <img id="chartImage" src="images/chart_pie.png" style="cursor:pointer;width:32px;vertical-align:middle;" onclick="pieClick()" alt="Draw Chart" title="Draw Chart"/>
+                    <img id="showTweetsImage" src="images/twitter-bird-gray-49x30.png" style="cursor:pointer;width:49px;height:30px;vertical-align:middle;" onclick="showHideTweets()" alt="Tweets" title="Toggle Tweets"/>
+                    <img id="showHeatMapImage" src="images/heatmap-gray.png" style="cursor:pointer;width:49px;height:30px;vertical-align:middle;" onclick="showHideHeatMap()" alt="HeatMap" title="Toggle HeatMap"/>
+                    <img id="loadingImage" src="images/loading29.gif" style="vertical-align:middle;width:31px;height:31px;border:0;position:absolute;right:3px;top:4px;z-index:99;"/>                 
+                </div>
+                <div id="tweetsContentPane" dojotype="dijit.layout.ContentPane" style="overflow-x:auto;">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
